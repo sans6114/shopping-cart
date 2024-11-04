@@ -7,30 +7,26 @@ import {
 import { cartContext } from './cartContext';
 
 export const CartProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(cartReducer, initialState)
 
+    const addToCart = (producto) => {
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: producto
+        })
+    }
 
-        //useReducer 
-        const [state, dispatch] = useReducer(cartReducer, initialState)
-
-        const addToCart = (producto) => {
-            dispatch({
-                type: 'addToCart',
-                payload: producto
-            })
-        }
-
-        const removeFromCart = (producto) => {
-            dispatch({
-                type: 'removeFromCart',
-                payload: producto
-            })
-        }
-
-        const clearCart = () => {
-            dispatch({
-                type: 'clearCart'
-            })
-        }
+    const removeFromCart = (producto) => {
+        dispatch({
+            type: 'REMOVE_FROM_CART',
+            payload: producto
+        })
+    }
+    const clearCart = () => {
+        dispatch({
+            type: 'CLEAR_CART',
+        })
+    }
 
     return (
         <cartContext.Provider value={{
