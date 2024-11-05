@@ -20,7 +20,7 @@ export const CardProduct = ({ producto }) => {
       addToCart(producto)
     }
   }
-  console.log(isProductInCard)
+  
   return (
     <div className="w-full max-w-sm h-full md:h-[700px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-around">
       <a href="#">

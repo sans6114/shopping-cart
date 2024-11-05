@@ -6,7 +6,7 @@ import {
 } from '../reducers/CartReducer';
 import { cartContext } from './cartContext';
 
-export const CartProvider = ({ children }) => {
+const useReducerCart = () => {
     const [state, dispatch] = useReducer(cartReducer, initialState)
 
     const addToCart = (producto) => {
@@ -27,7 +27,15 @@ export const CartProvider = ({ children }) => {
             type: 'CLEAR_CART',
         })
     }
-
+    return {
+        state,
+        addToCart,
+        removeFromCart,
+        clearCart
+    }
+}
+export const CartProvider = ({ children }) => {
+    const { state, addToCart, removeFromCart, clearCart } = useReducerCart()
     return (
         <cartContext.Provider value={{
             state,

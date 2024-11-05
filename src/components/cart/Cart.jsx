@@ -9,10 +9,12 @@ import {
 } from 'flowbite-react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { MdRemoveShoppingCart } from 'react-icons/md';
+import Swal from 'sweetalert2';
 
 import { useCart } from '../../hooks/useCart';
 import { CartItem } from './CartItem';
 
+//circle component
 const CartContent = ({ cart }) => {
     return (
         <>
@@ -21,22 +23,28 @@ const CartContent = ({ cart }) => {
     )
 }
 
-
-
 export const Cart = () => {
     const [openModal, setOpenModal] = useState(false);
     const { state: cart, clearCart } = useCart()
 
     useEffect(() => {
-    if (cart.length <= 0) {
-        setOpenModal(false);
-    }
+        if (cart.length <= 0) {
+            setOpenModal(false);
+        }
     }, [cart])
 
     return (
         <>
             <Button color='dark' className='fixed top-20 right-5 z-50' onClick={() => {
-                if (cart.length <= 0) return
+                if (cart.length <= 0) {
+                    //sweetalert
+                    return Swal.fire({
+                        title: 'Error!',
+                        text: 'you not have products in cart',
+                        icon: 'error',
+                        confirmButtonText: 'ok'
+                    })
+                }
                 setOpenModal(true)
             }}>
                 <FaShoppingCart size={20} />
